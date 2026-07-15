@@ -1,0 +1,18 @@
+name = "blok-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-07"
+
+workers_dev = true
+
+[vars]
+APP_ORIGIN = "http://localhost:5173,https://blok-e7n.pages.dev"
+AUTH_COOKIE_NAME = "blok_session"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blok-db"
+database_id = "a13711fa-ae44-441b-acb1-e806f3ed8bfe"
+migrations_dir = "migrations"
+
+[observability]
+enabled = true
