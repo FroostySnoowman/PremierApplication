@@ -23,14 +23,6 @@ function notifyKey(task: Task) {
   return `${task.id}:${task.dueAt ?? ''}`
 }
 
-async function ensurePermission(): Promise<boolean> {
-  if (typeof Notification === 'undefined') return false
-  if (Notification.permission === 'granted') return true
-  if (Notification.permission === 'denied') return false
-  const result = await Notification.requestPermission()
-  return result === 'granted'
-}
-
 function maybeNotify(tasks: Task[]) {
   if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return
   const now = Date.now()
@@ -70,20 +62,11 @@ export function useDeadlineNotifications(tasks: Task[], enabled: boolean) {
 
   useEffect(() => {
     if (!enabled) return
-    let cancelled = false
-    let timer: number | undefined
+    if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return
 
-    void (async () => {
-      const ok = await ensurePermission()
-      if (cancelled || !ok) return
-      maybeNotify(tasksRef.current)
-      timer = window.setInterval(() => maybeNotify(tasksRef.current), CHECK_MS)
-    })()
-
-    return () => {
-      cancelled = true
-      if (timer) window.clearInterval(timer)
-    }
+    maybeNotify(tasksRef.current)
+    const timer = window.setInterval(() => maybeNotify(tasksRef.current), CHECK_MS)
+    return () => window.clearInterval(timer)
   }, [enabled])
 
   useEffect(() => {

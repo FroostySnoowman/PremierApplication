@@ -4,8 +4,6 @@
 
 - **App:** https://blok-e7n.pages.dev
 - **API:** https://blok-api.froosty.workers.dev
-- Cloudflare account: Jacob (`1375a493110484a42c26f22fcda1478c`)
-- D1: `blok-db` (`a13711fa-ae44-441b-acb1-e806f3ed8bfe`)
 
 ## 1. Cloudflare login
 

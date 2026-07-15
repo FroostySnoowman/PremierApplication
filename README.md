@@ -72,5 +72,4 @@ Passwords require **12+ characters**, including a letter and a number.
 frontend/     React SPA
 api/          Hono Worker + D1 migrations
 DEPLOY.md     Cloudflare deploy steps
-reference/    Upstream API patterns (not deployed)
 ```
